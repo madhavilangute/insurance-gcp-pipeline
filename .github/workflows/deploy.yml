@@ -28,8 +28,11 @@ jobs:
 
     - name: Sync Files to GCS
       run: |
-        # This syncs your local folders to your bucket
-        # Replace 'your-bucket-name' with your actual GCS bucket name
+        # Force gcloud to use the authenticated service account
+        gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+        
+        # Sync the folders
+        # Replace 'your-bucket-name' with your actual bucket name
         gsutil -m rsync -r ./dags gs://your-bucket-name/dags
         gsutil -m rsync -r ./pyspark gs://your-bucket-name/pyspark
         gsutil -m rsync -r ./sql gs://your-bucket-name/sql
