@@ -28,11 +28,10 @@ jobs:
 
     - name: Sync Files to GCS
       run: |
-        # Force the project context
+        # Ensure the project is set correctly
         gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
         
-        # Use gsutil to sync your folders
-        # IMPORTANT: Replace 'your-actual-bucket-name' with your GCS bucket name
-        gsutil -m rsync -r ./dags gs://your-actual-bucket-name/dags
-        gsutil -m rsync -r ./pyspark gs://your-actual-bucket-name/pyspark
-        gsutil -m rsync -r ./sql gs://your-actual-bucket-name/sql
+        # Syncing your local folders to your specific bucket
+        gsutil -m rsync -r ./dags gs://my-first-bucket-1210/dags
+        gsutil -m rsync -r ./pyspark gs://my-first-bucket-1210/pyspark
+        gsutil -m rsync -r ./sql gs://my-first-bucket-1210/sql
